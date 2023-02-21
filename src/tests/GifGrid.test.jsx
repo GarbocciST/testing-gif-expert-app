@@ -16,9 +16,7 @@ describe('Pruebas en GifGrid', () => {
         })
 
         render(<GifGrid category={category} />)
-
         // screen.debug();
-
         expect(screen.getByText('Cargando...')).toBeTruthy();
         expect(screen.getByText(category)).toBeTruthy();
     })
@@ -42,9 +40,7 @@ describe('Pruebas en GifGrid', () => {
         })
 
         render(<GifGrid category={category} />)
-
-        screen.debug();
-
+        // screen.debug();
         const img = screen.getAllByRole('img');
 
         expect(img.length).toBe(2);
