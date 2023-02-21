@@ -15,8 +15,10 @@ describe('Pruebas en AddCategory', () => {
 
     
     test('debe reiniciarse el valor del input de ser >= 1 ', () => { 
+
+        const onNewCategory = jest.fn(); // Simula una funcion
         
-        render( <AddCategory onNewCategory={() => {}} /> );
+        render( <AddCategory onNewCategory={onNewCategory} /> );
         
         const input = screen.getByRole('textbox');
         const form = screen.getByRole('form');
@@ -26,11 +28,16 @@ describe('Pruebas en AddCategory', () => {
 
         // screen.debug();
         expect(input.value).toBe('');
+        expect(onNewCategory).toHaveBeenCalled();
+        expect(onNewCategory).toHaveBeenCalledTimes(1)
+        expect(onNewCategory).toHaveBeenCalledWith('Saitama');
     })
     
     test(' no debe enviarse el valor del input de ser <= 1', () => { 
 
-        render( <AddCategory onNewCategory={() => {}} /> );
+        const onNewCategory = jest.fn(); // Simula una funcion
+
+        render( <AddCategory onNewCategory={onNewCategory} /> );
 
         const input = screen.getByRole('textbox');
         const form = screen.getByRole('form');
@@ -39,6 +46,8 @@ describe('Pruebas en AddCategory', () => {
         fireEvent.submit( form )
         // screen.debug();
         expect(input.value).toBe('S');
+        expect(onNewCategory).toHaveBeenCalledTimes(0)
+        expect(onNewCategory).not.toHaveBeenCalled();
     })
 
     
